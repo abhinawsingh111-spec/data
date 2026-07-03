@@ -14,7 +14,7 @@ def init_db():
     return conn, c
 
 def fetch_crosstie(c4p_id):
-    url = f"https://www.codeweavers.com/compatibility/crosstie/{c4p_id}"
+    url = f"https://www.codeweavers.com/bin/c4p/{c4p_id}"
     headers = {"User-Agent": "RIFT-Data-Collector/1.0"}
     
     time.sleep(1.0)
