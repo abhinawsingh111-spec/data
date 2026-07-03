@@ -1,0 +1,35 @@
+name: 2-Hour Database Scraper
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Runs every 2 hours
+  workflow_dispatch: # Allows you to click 'Run workflow' manually
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+          
+      - name: Run CodeWeavers Scraper
+        run: python scrape_codeweavers.py
+        
+      - name: Run Lutris Scraper
+        run: python scrape_lutris.py
+        
+      - name: Commit and Push Data
+        run: |
+          git config --global user.name "RIFT Cloud Scraper"
+          git config --global user.email "bot@rift.com"
+          git add codeweavers_state.json lutris_pending.json cloud_codeweavers.db cloud_lutris.db
+          git commit -m "Automated Data Extraction" || echo "No new data to commit"
+          git push
