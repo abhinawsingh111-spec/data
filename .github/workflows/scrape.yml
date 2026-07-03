@@ -2,7 +2,7 @@ name: 2-Hour Database Scraper
 
 on:
   schedule:
-    - cron: '0 */2 * * *' # Runs every 2 hours
+    - cron: '17 * * * *' # Runs every hour at the 17th minute to bypass GitHub queues
   workflow_dispatch: # Allows you to click 'Run workflow' manually
 
 permissions:
