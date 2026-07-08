@@ -38,7 +38,7 @@ def fetch_crosstie(session, c4p_id):
                     return False
                 
                 # A valid CrossTie MUST have the root tag <c4p> and an <app> tag inside
-                if root.tag == "c4p" and root.find("app") is not None:
+                if root.tag == "c4p" and root.find(".//app") is not None:
                     app_name = root.find(".//app/name")
                     name_val = app_name.text if app_name is not None and app_name.text else "Unknown"
                     return (c4p_id, resp.text, name_val)
